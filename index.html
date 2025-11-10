@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Gaming Squad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff4655;
+            --secondary: #0f1923;
+            --accent: #1e90ff;
+            --dark: #0a0a0a;
+            --light: #ece8e1;
+            --text: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f1923 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(15, 25, 35, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(rgba(15, 25, 35, 0.8), rgba(15, 25, 35, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon points="100,100 150,200 250,150 300,250 400,200 450,300 550,250 600,350 700,300 750,400 850,350 900,450 950,400" fill="none" stroke="%23ff4655" stroke-width="2"/></svg>');
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 70, 85, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 70, 85, 0.3);
+        }
+
+        /* Games Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.2);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .game-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Squad Section */
+        .squad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .member-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .member-card:hover::before {
+            left: 100%;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .member-bio {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 3rem 0 2rem;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .games-grid,
+            .squad-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">🎮</div>
+                <div class="logo-text">21 GAMING</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#games" class="nav-link">Games</a>
+                <a href="#squad" class="nav-link">Squad</a>
+                <a href="#stats" class="nav-link">Stats</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="fade-in">21 GAMING SQUAD</h1>
+            <p class="fade-in">Elite players dominating PUBG, Valorant, CS:GO and more</p>
+            <a href="#squad" class="cta-button fade-in">Meet the Squad</a>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Games</h2>
+            <div class="games-grid">
+                <div class="game-card fade-in">
+                    <div class="game-icon">🎯</div>
+                    <h3 class="game-title">PUBG</h3>
+                    <p class="game-description">Battle royale specialists with strategic gameplay and chicken dinner expertise.</p>
+                </div>
+                <div class="game-card fade-in">
+                    <div class="game-icon">🔫</div>
+                    <h3 class="game-title">Arena Breakout</h3>
+                    <p class="game-description">Tactical extraction shooter masters with precise movement and combat skills.</p>
+                </div>
+                <div class="game-card fade-in">
+                    <div class="game-icon">🛡️</div>
+                    <h3 class="game-title">Rainbow Six Siege</h3>
+                    <p class="game-description">Strategic breaching and defending with operator mastery and team coordination.</p>
+                </div>
+                <div class="game-card fade-in">
+                    <div class="game-icon">💥</div>
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-description">Precise aim and ability usage with clutch plays and strategic executes.</p>
+                </div>
+                <div class="game-card fade-in">
+                    <div class="game-icon">🎮</div>
+                    <h3 class="game-title">CS:GO</h3>
+                    <p class="game-description">Classic tactical shooter with smoke lineups, spray control, and game sense.</p>
+                </div>
+                <div class="game-card fade-in">
+                    <div class="game-icon">⚔️</div>
+                    <h3 class="game-title">Call of Duty</h3>
+                    <p class="game-description">Fast-paced action with quick reflexes and aggressive playstyle domination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Squad Section -->
+    <section id="squad" class="section">
+        <div class="container">
+            <h2 class="section-title">The Squad</h2>
+            <div class="squad-grid">
+                <div class="member-card fade-in">
+                    <div class="member-avatar">K</div>
+                    <h3 class="member-name">Kaif</h3>
+                    <div class="member-role">Plan Master</div>
+                    <p class="member-bio">Strategic mastermind who plans every move and outsmarts opponents with brilliant tactics.</p>
+                </div>
+                <div class="member-card fade-in">
+                    <div class="member-avatar">S</div>
+                    <h3 class="member-name">Sudhee</h3>
+                    <div class="member-role">Assaulter</div>
+                    <p class="member-bio">Frontline warrior with aggressive playstyle, always leading the charge into battle.</p>
+                </div>
+                <div class="member-card fade-in">
+                    <div class="member-avatar">S</div>
+                    <h3 class="member-name">Sabbir</h3>
+                    <div class="member-role">Aim Master</div>
+                    <p class="member-bio">Precision shooter with incredible aim, known for headshots and clutch moments.</p>
+                </div>
+                <div class="member-card fade-in">
+                    <div class="member-avatar">T</div>
+                    <h3 class="member-name">Tahmid</h3>
+                    <div class="member-role">Sniper</div>
+                    <p class="member-bio">Long-range specialist who eliminates targets from distance with deadly accuracy.</p>
+                </div>
+                <div class="member-card fade-in">
+                    <div class="member-avatar">S</div>
+                    <h3 class="member-name">Sakib</h3>
+                    <div class="member-role">Hentai Lord</div>
+                    <p class="member-bio">Master of unconventional strategies and unexpected plays that confuse enemies.</p>
+                </div>
+                <div class="member-card fade-in">
+                    <div class="member-avatar">N</div>
+                    <h3 class="member-name">Navin</h3>
+                    <div class="member-role">Medic</div>
+                    <p class="member-bio">Support specialist who keeps the team alive and provides crucial backup when needed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="section">
+        <div class="container">
+            <h2 class="section-title">Squad Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Matches Played</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">2500+</div>
+                    <div class="stat-label">Eliminations</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Elite Players</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>21 Gaming Squad</h3>
+                    <p>Elite gaming team dominating multiple FPS titles with strategic gameplay and precise execution.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Main Games</h3>
+                    <p>PUBG • Arena Breakout • Rainbow Six Siege • Valorant • CS:GO • Call of Duty</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Ready for challenges and tournaments. Contact us for scrims and competitive matches.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 21 Gaming Squad. All rights reserved. | Built for domination
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.game-card, .member-card, .stat-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 25, 35, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 25, 35, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
